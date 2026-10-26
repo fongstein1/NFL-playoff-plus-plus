@@ -33,10 +33,10 @@ Click Refresh to retrieve other devices' latest submissions. Saves also retrieve
 
 Teams may stake up to 100% of their fund, including on a single selection. Stakes are whole points, so a fractional remainder can remain unused. No 50% reserve or 20% selection cap applies. The prop desk opens once conference results are settled. Saving the first submitted slip ends investment trading for the entire pool, keeping all prop budgets consistent. Merely drafting a slip does not end investments. The internal legacy `market.frozen` flag now represents this phase boundary, not protected capital.
 
-Scenario analysis and the reinsurance lab are under Investments. Both are previews and do not change standings. Only commissioner-run market sessions apply returns to all teams.
+Scenario analysis remains under Investments as a preview. Weekly News is a separate main tab. Commissioner-run news-week closures and standalone sessions apply returns to every team.
 
 ## Validation
 
-Run `node tests/scoring.mjs`, `node tests/markets.mjs`, `node tests/api.mjs`, `node tests/preview.mjs`, `node tests/credit-scenarios.mjs`, `node tests/reinsurance.mjs`, and `node tests/shared-pool.mjs`.
+Run `node tests/scoring.mjs`, `node tests/markets.mjs`, `node tests/api.mjs`, `node tests/preview.mjs`, `node tests/credit-scenarios.mjs`, `node tests/weekly-news.mjs`, and `node tests/shared-pool.mjs`.
 
 The shared-pool suite tests authorization, locked phases, server calculation, deterministic replay, stale submissions, duplicate retries, cookie validation and origin restrictions using an in-memory store. A real two-device Sheets write/read test remains required after the Google credential is installed.

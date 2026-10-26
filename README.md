@@ -1,14 +1,14 @@
 # NFL Playoff Plus Plus
 
-The Surplus Bowl is an office football pool with actuarial scoring, team portfolios, Super Bowl props and a reinsurance teaching lab. All stakes and returns are virtual points.
+The Surplus Bowl is an office football pool with actuarial scoring, team portfolios, Super Bowl props and a weekly news cycle. All stakes and returns are virtual points.
 
 Live dashboard: https://surplus-bowl.vercel.app
 
 ## Features
 
 - Team guesses: playoff winner picks, probability-based rewards and early-round bonuses.
-- Investment results: five asset classes, causal market scenarios and portfolio impact previews.
-- Reinsurance lab: quota share, surplus share, per-risk excess of loss, catastrophe cover and aggregate stop loss, plus life reinsurance basics.
+- Investment results: eight asset classes, causal market scenarios and portfolio impact previews.
+- Weekly News: upcoming fictional economic and football stories, group reasoning notes, news-adjusted playoff pool prices, and prior-week recaps with fund attribution.
 - Team comparisons: overall funds, investment performance and daily movements.
 - Super Bowl: stake up to 100% of a team fund, including on one selection. Whole-point stakes leave any fractional remainder unused. No protected reserve applies. Saving the first submitted prop slip ends investment trading for every team.
 - Shared pool: Google Sheets submission log, team codes, commissioner controls, conflict detection and retry deduplication.
@@ -40,11 +40,13 @@ Never commit credentials or distribute the private Sheet itself to participants.
 
 The Sheet ID and session-signing secret are configured in Vercel. Shared saving still needs `GOOGLE_SERVICE_ACCOUNT_JSON` and Editor sharing of the Sheet with that service account. Until configured, `/api/pool` returns HTTP 503 with a setup explanation. Calculator previews and local demo saving work independently.
 
-See [SHARED_POOL.md](SHARED_POOL.md) for the Sheet contract and remaining connection steps, [SCENARIO_MODEL.md](SCENARIO_MODEL.md) for the market assumptions, and [REINSURANCE_LAB.md](REINSURANCE_LAB.md) for treaty calculations and sources.
+See [SHARED_POOL.md](SHARED_POOL.md) for the Sheet contract and remaining connection steps, [SCENARIO_MODEL.md](SCENARIO_MODEL.md) for the market assumptions.
 
 ## Tests
 
-`npm test` runs seven suites covering scoring, market calculation, API input validation, portfolio previews, credit-spread effects, reinsurance calculations and shared-pool authorization/concurrency. The shared-pool tests use an in-memory store. A live two-device Sheets round trip remains to be verified after installing the Google credential.
+`npm test` runs seven suites covering scoring, market calculation, API input validation, portfolio previews, credit-spread effects, weekly-news resolution and shared-pool authorization/concurrency. The shared-pool tests use an in-memory store. A live two-device Sheets round trip remains to be verified after installing the Google credential.
+
+See [WEEKLY_NEWS.md](WEEKLY_NEWS.md) for the weekly lifecycle, quote rules and three new fund sensitivities.
 
 ## Fonts
 

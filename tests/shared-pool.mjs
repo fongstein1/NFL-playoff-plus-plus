@@ -8,7 +8,7 @@ const initial=sharedSeed();assert.equal(initial.games.filter(g=>g.result!==null)
 assert.throws(()=>applyAction(initial,{type:'pick',teamId:'alex',gameId:'g0',side:0},team),/own team/);
 assert.throws(()=>applyAction(initial,{type:'finish'},team),/Commissioner/);
 let s=applyAction(initial,{type:'pick',teamId:'david',gameId:'g0',side:0},team);
-assert.deepEqual(inferAction(initial,s,'david'),{type:'pick',teamId:'david',gameId:'g0',side:0});
+assert.deepEqual(inferAction(initial,s,'david'),{type:'pick',teamId:'david',gameId:'g0',side:0,newsPricing:true});
 s=applyAction(s,{type:'finish'},admin);assert.throws(()=>applyAction(s,{type:'pick',teamId:'david',gameId:'g0',side:1},team),/closed/);
 const before=structuredClone(s);s=applyAction(s,{type:'slip',teamId:'david',bets:{winner:{side:0,stake:27}},submitted:true},team);assert.equal(s.market.frozen,true);assert.deepEqual(inferAction(before,s,'david'),{type:'slip',teamId:'david',bets:{winner:{side:0,stake:27}},submitted:true});
 assert.throws(()=>applyAction(s,{type:'lockAllocations',locked:true},admin),/ended/);
@@ -21,7 +21,7 @@ const call=(body,cookie,origin='https://pool.test')=>handlePool(new Request('htt
 assert.equal((await call()).status,401);
 assert.equal((await call({mode:'login',teamId:'david',code:'incorrect-code-12345'})).status,401);
 const login=await call({mode:'login',teamId:'david',code:'test-code-123456789'});assert.equal(login.status,200);const cookie=login.headers.get('set-cookie').split(';')[0];assert.match(login.headers.get('set-cookie'),/HttpOnly; SameSite=Strict/);
-const command={mode:'mutate',id:e.id,baseRevision:0,action:e.action};assert.equal((await call(command,cookie)).status,200);assert.equal((await call(command,cookie)).status,200);assert.equal(rows.length,1);
+const command={mode:'mutate',id:e.id,baseRevision:0,action:e.action};assert.equal((await call(command,cookie)).status,200);assert.equal((await call(command,cookie)).status,200);assert.equal(rows.length,1);assert.equal(rows[0].action.newsPricing,true);
 assert.equal((await call({...command,id:concurrent.id},cookie)).status,409);
 assert.equal((await call({...command,id:'unauthorized-command',baseRevision:1,action:{type:'finish'}},cookie)).status,403);
 assert.equal((await call(command,cookie,'https://evil.test')).status,403);

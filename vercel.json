@@ -37,8 +37,8 @@
       "destination": "/api/backend/scenarios"
     },
     {
-      "source": "/api/reinsurance",
-      "destination": "/api/backend/reinsurance"
+      "source": "/api/weekly",
+      "destination": "/api/backend/weekly"
     }
   ]
 }

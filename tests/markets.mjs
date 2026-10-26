@@ -26,5 +26,5 @@ close(Object.values(m.history[0].outcomes.b.byAsset).reduce((a,b)=>a+b,0),m.pnl.
 assert.equal(m.locked,false);assert.equal(m.history.length,1);
 const prior=m.pnl.a;m.locked=true;m.lockedWeights=structuredClone(m.allocations);m=applyMarketDay(m,people,{a:200,b:100},scenarioFor({day:2,scenarioId:'quiet'}));close(m.pnl.a-prior,(200+prior)*.0001);
 m.frozen=true;assert.throws(()=>applyMarketDay(m,people,{a:200,b:100},e));
-const all=catalog();assert.equal(all.scenarioCount,22);assert.ok(all.courseStatus.includes('unavailable'));
+const all=catalog();assert.equal(all.scenarioCount,22);assert.equal(assets.length,8);
 console.log('PASS: 22 scenarios, directional shocks, bond duration, deterministic regime draws, input bounds, locked allocations, cash carry, asset attribution, contribution timing and frozen funds');

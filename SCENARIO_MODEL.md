@@ -4,7 +4,7 @@ The server exposes GET /api/scenarios (catalog and assumptions) and POST /api/sc
 
 ## Course grounding
 
-Inspired by the September 2025 conversation walkthrough of the user's Swiss Re insurance simulation report: allocation, bonds/duration, equity and property stress, and competitor comparisons. The original course workbook was not recovered; no course formulas, frequencies or calibration are asserted. This game has no liabilities, regulatory capital or insurance underwriting engine.
+This is a fictional football-pool market model. All coefficients, frequencies and outcomes are house assumptions.
 
 ## Economic model
 
@@ -27,7 +27,6 @@ Overall fund snapshots include capital and market results; Now adds subsequent c
 
 ## Primary references for general concepts
 
-- Swiss Re, alternative economic and insurance scenarios: https://www.swissre.com/dam/jcr%3Adba3dccf-9483-4d42-acf6-3f654bd02898/2023-11-sri-sigma6-global-outlook-2023.pdf
 - MSRB, Evaluating Interest Rate Risk (duration and convexity): https://www.msrb.org/sites/default/files/Evaluating-Interest-Rate-Risk.pdf
 
 These support general scenario and bond-risk concepts, not the game's coefficients.
@@ -61,3 +60,5 @@ A separate creditBps factor distinguishes credit-spread changes from benchmark y
 The 0.03% carry, durations and convexity are illustrative house parameters for a game session. A 30 bp spread tightening with unchanged government yields contributes approximately +1.20% from spread duration alone; convexity and carry give +1.2408% in this model. No government-bond spread gain is invented. Narrower spreads lift existing corporate bond prices but reduce the extra yield on new purchases.
 
 Primary conceptual reference: CFA Institute, Credit Risk: https://www.cfainstitute.org/insights/professional-learning/refresher-readings/2026/credit-risk . This supports the relationship and duration method, not the game's calibration or assumed news responses.
+
+Version 3 adds technology, energy and gold as optional holdings. Existing allocations migrate with zero exposure to the new funds; prior numerical gains remain unchanged. See WEEKLY_NEWS.md for sensitivities and weekly sector overlays.

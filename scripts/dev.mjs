@@ -5,15 +5,15 @@ import {fileURLToPath} from 'node:url';
 import pool from '../api/backend/pool.mjs';
 import scenarios from '../api/backend/scenarios.mjs';
 import preview from '../api/backend/scenarios/preview.mjs';
-import reinsurance from '../api/backend/reinsurance.mjs';
+import weekly from '../api/backend/weekly.mjs';
 const root=fileURLToPath(new URL('../public/',import.meta.url));
-const routes={'/api/pool':pool,'/api/scenarios':scenarios,'/api/scenarios/preview':preview,'/api/reinsurance':reinsurance};
+const routes={'/api/pool':pool,'/api/scenarios':scenarios,'/api/scenarios/preview':preview,'/api/weekly':weekly};
 const types={'.html':'text/html; charset=utf-8','.mjs':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.svg':'image/svg+xml','.woff':'font/woff','.txt':'text/plain; charset=utf-8'};
 const server=http.createServer(async(req,res)=>{
  try{
   const url=new URL(req.url,'http://localhost');
   const handler=routes[url.pathname];
-  if(handler){let body='';for await(const chunk of req){body+=chunk;if(body.length>65536){res.writeHead(413);res.end('Request too large.');return;}}req.body=body;req.headers['x-forwarded-proto']='http';req.headers['x-forwarded-host']=req.headers.host;return await handler(req,res);}
+  if(handler){let body='';for await(const chunk of req){body+=chunk;if(body.length>131072){res.writeHead(413);res.end('Request too large.');return;}}req.body=body;req.headers['x-forwarded-proto']='http';req.headers['x-forwarded-host']=req.headers.host;return await handler(req,res);}
   if(!['GET','HEAD'].includes(req.method)){res.writeHead(405);res.end();return;}
   const name=url.pathname==='/'?'index.html':decodeURIComponent(url.pathname).replace(/^\/+/,''),file=path.resolve(root,name);
   if(!file.startsWith(root)){res.writeHead(403);res.end();return;}

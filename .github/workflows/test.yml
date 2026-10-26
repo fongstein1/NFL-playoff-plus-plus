@@ -18,5 +18,5 @@ jobs:
           node tests/api.mjs
           node tests/preview.mjs
           node tests/credit-scenarios.mjs
-          node tests/reinsurance.mjs
+          node tests/weekly-news.mjs
           node tests/shared-pool.mjs
