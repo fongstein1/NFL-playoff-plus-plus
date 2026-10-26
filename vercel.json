@@ -1,0 +1,44 @@
+{
+  "framework": null,
+  "installCommand": "echo No runtime dependencies",
+  "buildCommand": "echo Serving dashboard and Node APIs",
+  "outputDirectory": "public",
+  "functions": {
+    "api/**/*.mjs": {
+      "maxDuration": 60
+    }
+  },
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "same-origin"
+        }
+      ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/pool",
+      "destination": "/api/backend/pool"
+    },
+    {
+      "source": "/api/scenarios/preview",
+      "destination": "/api/backend/scenarios/preview"
+    },
+    {
+      "source": "/api/scenarios",
+      "destination": "/api/backend/scenarios"
+    },
+    {
+      "source": "/api/reinsurance",
+      "destination": "/api/backend/reinsurance"
+    }
+  ]
+}

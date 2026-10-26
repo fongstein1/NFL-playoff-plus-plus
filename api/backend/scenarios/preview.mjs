@@ -1,0 +1,3 @@
+import {webHandler} from '../../../lib/http.mjs';
+import {previewPortfolios} from '../../../lib/portfolio-preview.mjs';
+export default async function handler(req,res){return webHandler(req,res,async request=>{if(request.method!=='POST')return Response.json({error:'Method not allowed.'},{status:405});if(request.headers.get('origin')&&request.headers.get('origin')!==new URL(request.url).origin)return Response.json({error:'Same-origin requests only.'},{status:403});try{const t=await request.text();if(t.length>32768)throw Error('Request too large.');return Response.json(previewPortfolios(JSON.parse(t)),{headers:{'Cache-Control':'no-store'}});}catch(e){return Response.json({error:e.message},{status:400});}});}

@@ -1,0 +1,10 @@
+import assert from 'node:assert/strict';
+import {GET,POST} from '../app/api/scenarios/route.ts';
+const root='https://pool.example';
+const fetch=(url,init)=>init?.method==='POST'?POST(new Request(url,init)):GET();
+const catalog=await fetch(root+'/api/scenarios');assert.equal(catalog.status,200);assert.equal((await catalog.json()).scenarioCount,22);
+const post=body=>fetch(root+'/api/scenarios',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+const result=await post({day:1,scenarioId:'hot-inflation'});assert.equal(result.status,200);const event=await result.json();assert.ok(event.returns.bonds<0&&event.returns.equity<0);assert.equal(event.modelVersion,'surplus-macro-v2');
+for(const body of [{day:0},{day:1,scenarioId:'missing'},{day:1,previousRegime:'missing'}])assert.equal((await post(body)).status,400);
+const blocked=await fetch(root+'/api/scenarios',{method:'POST',headers:{Origin:'https://unrelated.example','Content-Type':'application/json'},body:'{"day":1}'});assert.equal(blocked.status,403);
+console.log('PASS: API handler catalog, scenario calculation, invalid inputs and origin boundary');

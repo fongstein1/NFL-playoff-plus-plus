@@ -1,0 +1,22 @@
+name: Pool calculations
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: |
+          node tests/scoring.mjs
+          node tests/markets.mjs
+          node tests/api.mjs
+          node tests/preview.mjs
+          node tests/credit-scenarios.mjs
+          node tests/reinsurance.mjs
+          node tests/shared-pool.mjs

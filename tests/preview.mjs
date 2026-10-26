@@ -1,0 +1,21 @@
+import assert from 'node:assert/strict';
+import {previewPortfolios} from '../lib/portfolio-preview.mjs';
+import {POST} from '../app/api/scenarios/preview/route.ts';
+const teams=[{id:'a',name:'Balanced',balance:1000,weights:{equity:50,bonds:30,property:10,cash:10}},{id:'b',name:'Cash',balance:1000,weights:{equity:0,bonds:0,property:0,cash:100}}];
+const raw=JSON.stringify(teams);
+const request={mode:'direct',returns:{equity:-10,bonds:2,property:-5,cash:0},portfolios:teams};
+const r=previewPortfolios(request);assert.equal(r.previewOnly,true);assert.equal(r.results[0].gain,-49);assert.equal(r.results[0].closing,951);assert.equal(r.results[1].gain,0);assert.equal(r.totalChange,-49);assert.equal(JSON.stringify(teams),raw);
+for(const p of r.results)assert.equal(Object.values(p.contributions).reduce((a,b)=>a+b,0),p.gain);
+const generated={mode:'generate',severity:'severe',seed:'same',portfolios:teams};assert.deepEqual(previewPortfolios(generated),previewPortfolios(generated));
+const preset=previewPortfolios({mode:'preset',scenarioId:'hot-inflation',portfolios:teams});assert.ok(preset.returns.bonds<0&&preset.returns.equity<0);
+const flat=previewPortfolios({...request,returns:{equity:0,bonds:0,property:0,cash:0}});assert.equal(flat.totalChange,0);
+assert.throws(()=>previewPortfolios({...request,returns:{...request.returns,equity:NaN}}));
+assert.throws(()=>previewPortfolios({...request,returns:{...request.returns,equity:-51}}));
+assert.throws(()=>previewPortfolios({...request,portfolios:[{...teams[0],weights:{equity:60,bonds:60,property:0,cash:0}}]}));
+assert.throws(()=>previewPortfolios({...request,portfolios:[teams[0],teams[0]]}));
+assert.throws(()=>previewPortfolios({...generated,severity:'extreme'}));
+const response=await POST(new Request('https://pool.example/api/scenarios/preview',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(request)}));assert.equal(response.status,200);assert.equal((await response.json()).results[0].closing,951);
+const bad=await POST(new Request('https://pool.example/api/scenarios/preview',{method:'POST',body:'invalid'}));assert.equal(bad.status,400);
+console.log('PASS: independent portfolio attribution, reproducible generation, preset shocks, zero movement, input validation, API response and immutable inputs');
+for(const severity of ['mild','moderate','severe'])for(let i=0;i<100;i++){const x=previewPortfolios({mode:'generate',severity,seed:'test-'+i,portfolios:teams});assert.ok(Object.values(x.returns).every(v=>Number.isFinite(v)&&Math.abs(v)<=8));if(severity==='severe')assert.notEqual(x.headline,'Markets digest the news in a quiet session');}
+console.log('PASS: 300 generated scenarios across all strengths');
