@@ -44,3 +44,17 @@ The shared-pool suite tests authorization, locked phases, server calculation, de
 ## Rules version 2
 
 New pools use the annual investment lifecycle documented in WEEKLY_NEWS.md. Picks open only after that round's investment sale. Super Bowl slips require the fourth sale. The commissioner locks round picks separately from the sale and must enter final results before advancing. New pools pay 10/probability with no round multiplier. Replay preserves legacy scoring for previously active logs; new event records include schemaVersion 2. Game-source actions fetch and validate matching postseason context server-side. Source context does not change settlement.
+
+
+## Connection checklist and harmless live test
+
+1. In Google Cloud, select the service account's project and enable Google Sheets API. Create a dedicated service account if needed; project-wide Editor and domain-wide delegation are not required.
+2. From IAM & Admin → Service Accounts → the account → Keys → Add key → Create new key, download a JSON key. If you already securely retain the NHL account's JSON, that account can be reused, with access explicitly granted to this Sheet.
+3. Share the pool Sheet with the JSON client_email as Editor, leaving general access Restricted. Keep the JSON private.
+4. In Vercel's existing surplus-bowl project, add GOOGLE_SERVICE_ACCOUNT_JSON as a Production Secret (Sensitive in older UI). Paste the entire raw JSON object, not just private_key or a filename. GOOGLE_SHEET_ID and POOL_SESSION_SECRET are already present. Use a separate test Sheet for Preview if adding Preview credentials.
+5. Redeploy the latest main commit after saving. Environment changes do not affect an existing deployment.
+6. Open the production dashboard, choose Team sign in, then use a team's code from the private Access tab. Browser-demo changes do not automatically migrate to the shared pool.
+7. While Week 1 is in planning, save a discussion note reading Connection test. Verify one new discussion row in Events, refresh the dashboard, then sign in as the same team in a separate browser and verify the same note after Refresh. Replace it with the desired note and save again; preserve the audit rows.
+8. Confirm a team login has no active commissioner controls. Do not run years, lock picks or enter results for this connection test. Keep Initial!B2 and Events unchanged manually.
+
+Expected troubleshooting: setup-incomplete means missing deployment variables; Google-authentication failure means malformed/revoked credentials; Sheet-read failure means sharing, Sheet ID or API setup; rejected login means the selected team and code do not match. Production write/read verification remains pending until the credential is installed.
