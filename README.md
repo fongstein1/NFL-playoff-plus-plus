@@ -1,53 +1,21 @@
-# NFL Playoff Plus Plus
+# NFL Playoff Plus Plus · The Surplus Bowl
 
-The Surplus Bowl is an office football pool with actuarial scoring, team portfolios, Super Bowl props and a weekly news cycle. All stakes and returns are virtual points.
+A virtual-points NFL pool with a football-field dashboard, weekly news, eight investment funds, game detail panels, Super Bowl props and four trophies.
 
-Live dashboard: https://surplus-bowl.vercel.app
+## Play
 
-## Features
+Read news and allocate the fund → simulate a full investment year and sell to cash → pick playoff winners → enter results → repeat. A correct playoff pick pays `10 / submitted probability`; it costs no stake. New pools have no automatic round-interest multiplier. Earlier winnings instead have more future investment opportunities.
 
-- Team guesses: playoff winner picks, probability-based rewards and early-round bonuses.
-- Investment results: eight asset classes, causal market scenarios and portfolio impact previews.
-- Weekly News: upcoming fictional economic and football stories, group reasoning notes, news-adjusted playoff pool prices, and prior-week recaps with fund attribution.
-- Team comparisons: overall funds, investment performance and daily movements.
-- Super Bowl: stake up to 100% of a team fund, including on one selection. Whole-point stakes leave any fractional remainder unused. No protected reserve applies. Saving the first submitted prop slip ends investment trading for every team.
-- Shared pool: Google Sheets submission log, team codes, commissioner controls, conflict detection and retry deduplication.
+The final sale funds Super Bowl props: up to 100% may be staked, returns include the stake, voids refund it, and pending bets remain valued at cost. Four separate awards recognize final fund, net Super Bowl profit, correct playoff picks and compounded investment percentage return. Ties share an award. The Rules view contains examples and edge cases.
 
-Matchups, probabilities, prices and market news are illustrative. No live scores, wagers, market feeds or automatic market sessions are connected.
+NFL logos cover all 32 clubs. Click a game for pool quotes, entries and trusted NFL/ESPN links. Commissioners can attach an ESPN postseason event; both clubs must match. Event context is fetched server-side and does not alter pool settlement. Demo fixtures, odds and results are illustrative, with absent kickoff/venue information explicitly labeled.
 
-## Run locally
+## Run and verify
 
-Use Node.js 24. The app has no third-party runtime dependencies.
+Node 24; no runtime dependencies. `npm test` runs all suites. `npm run dev` starts the local app. Vercel serves `public/` and rewrites APIs to `api/backend/`.
 
-```sh
-npm test
-npm run dev
-```
+## Shared saving
 
-Open http://localhost:4173. Set `PORT` to change the port. Without Google credentials, the app runs as an explicitly labelled browser-local demo. Existing browser demo data is separate from the shared pool.
+See SHARED_POOL.md for Google Sheet structure, role-based command validation, session cookies and environment variables. Production currently has the Sheet ID and session secret; the Google service-account credential remains required before shared writes work. Browser demo mode is clearly labeled and uses its own v2 storage key. Existing legacy command logs retain their original scoring.
 
-For a local shared-pool connection, put the variables from `.env.example` in a local `.env.local` file, then run:
-
-```sh
-node --env-file=.env.local scripts/dev.mjs
-```
-
-Never commit credentials or distribute the private Sheet itself to participants. Give each team only its own access code.
-
-## Vercel and Google Sheets
-
-`vercel.json` serves `public/` and the Node functions in `api/backend/`, with stable `/api/*` rewrites. It overrides framework detection and skips dependency installation. Keep the existing `surplus-bowl` Vercel project and its access controls.
-
-The Sheet ID and session-signing secret are configured in Vercel. Shared saving still needs `GOOGLE_SERVICE_ACCOUNT_JSON` and Editor sharing of the Sheet with that service account. Until configured, `/api/pool` returns HTTP 503 with a setup explanation. Calculator previews and local demo saving work independently.
-
-See [SHARED_POOL.md](SHARED_POOL.md) for the Sheet contract and remaining connection steps, [SCENARIO_MODEL.md](SCENARIO_MODEL.md) for the market assumptions.
-
-## Tests
-
-`npm test` runs seven suites covering scoring, market calculation, API input validation, portfolio previews, credit-spread effects, weekly-news resolution and shared-pool authorization/concurrency. The shared-pool tests use an in-memory store. A live two-device Sheets round trip remains to be verified after installing the Google credential.
-
-See [WEEKLY_NEWS.md](WEEKLY_NEWS.md) for the weekly lifecycle, quote rules and three new fund sensitivities.
-
-## Fonts
-
-The dashboard uses a self-hosted DejaVu Sans subset. Its license is in `public/fonts/LICENSE.txt`.
+Model details and calibration limits: SCENARIO_MODEL.md. Weekly lifecycle: WEEKLY_NEWS.md. All money-like balances are virtual points. This app does not place real bets or trade securities.

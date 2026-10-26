@@ -5,9 +5,10 @@ import {fileURLToPath} from 'node:url';
 import pool from '../api/backend/pool.mjs';
 import scenarios from '../api/backend/scenarios.mjs';
 import preview from '../api/backend/scenarios/preview.mjs';
+import games from '../api/backend/games.mjs';
 import weekly from '../api/backend/weekly.mjs';
 const root=fileURLToPath(new URL('../public/',import.meta.url));
-const routes={'/api/pool':pool,'/api/scenarios':scenarios,'/api/scenarios/preview':preview,'/api/weekly':weekly};
+const routes={'/api/pool':pool,'/api/scenarios':scenarios,'/api/scenarios/preview':preview,'/api/weekly':weekly,'/api/games':games};
 const types={'.html':'text/html; charset=utf-8','.mjs':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.svg':'image/svg+xml','.woff':'font/woff','.txt':'text/plain; charset=utf-8'};
 const server=http.createServer(async(req,res)=>{
  try{

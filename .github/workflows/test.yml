@@ -12,11 +12,4 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
-      - run: |
-          node tests/scoring.mjs
-          node tests/markets.mjs
-          node tests/api.mjs
-          node tests/preview.mjs
-          node tests/credit-scenarios.mjs
-          node tests/weekly-news.mjs
-          node tests/shared-pool.mjs
+      - run: npm test

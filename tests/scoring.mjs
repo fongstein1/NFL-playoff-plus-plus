@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import {reward,balance,validateSlip,settlement} from '../public/engine.mjs';
-assert.equal(reward(.5,0),39.0625);
-for(const r of [0,1,2])for(const p of [.2,.5,.8])assert.ok(Math.abs(p*reward(p,r)-10*1.25**(3-r))<1e-9);
+assert.equal(reward(.5,0),20);
+for(const r of [0,1,2])for(const p of [.2,.5,.8])assert.ok(Math.abs(p*reward(p,r)-10)<1e-9);
 const markets=[{id:'a',odds:[1.9,2.1],result:0},{id:'b',odds:[2.5,1.5],result:1},{id:'c',odds:[3,1.4],result:0}];
 const bets={a:{stake:80,side:0},b:{stake:60,side:0},c:{stake:60,side:0}};
 assert.equal(validateSlip(bets,400,markets),null);
@@ -18,4 +18,4 @@ markets.forEach(m=>m.result='void');assert.equal(settlement(bets,400,markets).cl
 markets.forEach(m=>m.result=1);assert.equal(settlement({a:{stake:80,side:0}},400,markets).closing,320);
 markets[0].result=null;assert.equal(settlement({a:{stake:80,side:0}},400,markets).closing,null);
 assert.equal(balance({games:[{id:'g',round:0,p:[.5,.5],result:null}],picks:{a:{g:0}}},'a'),0);
-console.log('PASS: compounding, equal expected value, worked payout, total and single stake limits, invalid stakes, refunds, losses and pending outcomes');
+console.log('PASS: no round bonus, equal expected value, worked payout, total and single stake limits, invalid stakes, refunds, losses and pending outcomes');

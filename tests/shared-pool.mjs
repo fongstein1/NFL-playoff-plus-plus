@@ -4,7 +4,7 @@ import {applyAction,replay} from '../lib/pool-actions.mjs';
 import {handlePool} from '../lib/pool-api.mjs';
 import {inferAction} from '../public/shared-pool.mjs';
 const team={role:'team',teamId:'david'},admin={role:'admin',teamId:'david'};
-const initial=sharedSeed();assert.equal(initial.games.filter(g=>g.result!==null).length,0);
+const initial=sharedSeed();initial.rulesVersion=1;assert.equal(initial.games.filter(g=>g.result!==null).length,0);
 assert.throws(()=>applyAction(initial,{type:'pick',teamId:'alex',gameId:'g0',side:0},team),/own team/);
 assert.throws(()=>applyAction(initial,{type:'finish'},team),/Commissioner/);
 let s=applyAction(initial,{type:'pick',teamId:'david',gameId:'g0',side:0},team);

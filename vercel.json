@@ -39,6 +39,10 @@
     {
       "source": "/api/weekly",
       "destination": "/api/backend/weekly"
+    },
+    {
+      "source": "/api/games",
+      "destination": "/api/backend/games"
     }
   ]
 }
