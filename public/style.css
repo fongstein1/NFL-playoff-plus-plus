@@ -22,3 +22,20 @@ body{background:#0c251d url('/football-field.svg') center top/cover fixed no-rep
 @media(max-width:1050px){.trophy-grid{grid-template-columns:1fr 1fr}.trophy-card h3{min-height:0}.trophy-winners{min-height:0}.rules-prize-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:700px){.game-dialog{padding:18px}.game-dialog h2{font-size:17px;gap:10px}.game-dialog h2 img{width:36px;height:36px}.game-facts{grid-template-columns:1fr}.game-dialog .table-wrap{margin-inline:-8px}.game-dialog td{font-size:11px}.link-game-form>div{flex-direction:column}.rules-hero{padding:25px 20px}.rules-hero h2{font-size:39px}.rules-playbook{grid-template-columns:1fr}.rules-playbook>article{padding:20px;gap:13px}.rules-playbook h3{font-size:18px}.rule-detail-grid{grid-template-columns:1fr}.trophy-grid{gap:11px}.trophy-card{padding:16px}.trophy-card h3{font-size:17px}.trophy-value{font-size:24px}.trophy-card>.eyebrow{font-size:7px}.trophy-card>p{font-size:10px}.toolbar nav{grid-template-columns:repeat(2,minmax(0,1fr))}.toolbar nav button:last-child{grid-column:1/-1}.rules-prizes h3{font-size:19px}}
 @media(max-width:430px){.trophy-grid{grid-template-columns:1fr}.trophy-card{padding:21px}.trophy-winners{font-size:13px}.trophy-card>small{min-height:0}.trophy-card>p{font-size:11px}.trophy-top{margin-bottom:14px}.rules-prize-grid{gap:12px}.rules-prizes{padding:19px}}
+/* Brighter stadium and a readable, paper-coloured weekly sports section. */
+:root{--panel:#21445e;--line:#68879c;--muted:#d0e0eb;--text:#f8fbfd;--green:#a6edc1}
+body:before{background:linear-gradient(90deg,#06121a0a,#10243d40 30%,#10243d40 70%,#06121a0a)}
+.stadium{background:linear-gradient(180deg,#173c5638,#173c5624)}
+.top{background:#16354beF}.card,.stat{background:linear-gradient(135deg,#28516bf5,#1c3c56f5);border-color:#7594aa}
+.pool-summary,.demo-notice,.connection-bar{background:#21455bf2;border-color:#829daf}.toolbar nav button{background:#23485fe8;color:#f3f8fc}.banner{background:#28516bed}
+.choice,button,select,input,textarea{background:#244a64;border-color:#7899b0}.choice.selected,.round-tabs .selected{background:#586454;border-color:#ffe2a0;color:#fff2cd}button:hover:not(:disabled){background:#34617d}
+.news-fiction{background:#e7eee8;color:#2b4551;border-color:#abc1b7;border-left-color:#bd8e35}
+.news-story{background:#f6f2e7;border-color:#d7d4c7;border-top:3px solid #b78a35;box-shadow:0 5px 16px #07172924;padding:26px}
+.news-story h3{color:#153c51;font-size:22px;line-height:1.35}.news-story p{color:#334d59;font-size:14px;line-height:1.85;margin:0 0 16px}.news-story p:last-child{margin-bottom:0}
+.news-story-top{margin-bottom:14px}.news-story-number{color:#857247}.news-story .news-kind{color:#4a6471}.news-story .news-signal{color:#5a624f;border-color:#a5b39f;background:#e9eee2}
+.news-story .news-funds span{color:#654c1b;background:#eee3c7;border-color:#bca26d}.news-story .news-transmission{background:#e7ece5;border-color:#b8c6b7}.news-story .news-transmission summary{color:#315242}.news-story .news-transmission ol{color:#3e574c}.news-story .news-transmission p{font-size:12px;color:#3e574c}.news-story .news-transmission a{color:#725519}
+.news-back{background:#20445df5;border-color:#7894a8}.news-column-label{color:#f5fafc;border-color:#b5d1df99}.news-week-heading p{color:#e0edf4}.news-empty p,.recap-story p{color:#dce9f2}.weekly-returns>div{background:#2b526c}.news-empty .news-whistle{color:#c0d1dd}
+.lab-inputs,.lab-results{background:#20445df5}.driver-grid>div,.credit-comparison{background:#2b526c}.trophy-card{background:linear-gradient(145deg,#315d77,#20435b)}
+.rules-hero{background:linear-gradient(115deg,#315e78,#21455e)}.rules-playbook>article,.rules-prizes{background:#21485ff5}.rules-playbook p{color:#e2edf5}.rules-playbook small{color:#c9deeb}.rules-example{background:#3e6069}.rules-pills span{color:#e0edf6}.rules-prize-grid span{color:#d8e8f1}
+footer{background:#173b50d9}
+@media(max-width:700px){.news-story{padding:21px}.news-story h3{font-size:20px}.news-story p{font-size:14px}}

@@ -16,6 +16,6 @@ Node 24; no runtime dependencies. `npm test` runs all suites. `npm run dev` star
 
 ## Shared saving
 
-See SHARED_POOL.md for Google Sheet structure, role-based command validation, session cookies and environment variables. Production currently has the Sheet ID and session secret; the Google service-account credential remains required before shared writes work. Browser demo mode is clearly labeled and uses its own v2 storage key. Existing legacy command logs retain their original scoring.
+See SHARED_POOL.md for Google Sheet structure, role-based command validation, session cookies and environment variables. Shared saving requires GOOGLE_SHEET_ID, POOL_SESSION_SECRET and GOOGLE_SERVICE_ACCOUNT_JSON in the deployment. Browser demo mode is clearly labeled and uses its own v2 storage key. Existing legacy command logs retain their original scoring.
 
 Model details and calibration limits: SCENARIO_MODEL.md. Weekly lifecycle: WEEKLY_NEWS.md. All money-like balances are virtual points. This app does not place real bets or trade securities.

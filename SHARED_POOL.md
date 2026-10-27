@@ -10,9 +10,9 @@ The Vercel app serves the existing dashboard from `public/` and the Node APIs fr
 
 ## Runtime setup
 
-Vercel already has `GOOGLE_SHEET_ID` and a generated sensitive `POOL_SESSION_SECRET`. Add `GOOGLE_SERVICE_ACCOUNT_JSON` as a sensitive environment variable for Production and Preview. Use a Google service account with the Sheets API enabled and share this new Sheet with its `client_email` as Editor. Keep the Sheet restricted. Never commit the JSON key or paste it into a chat message. Redeploy after adding the variable.
+Configure `GOOGLE_SHEET_ID`, a generated secret `POOL_SESSION_SECRET`, and secret `GOOGLE_SERVICE_ACCOUNT_JSON` for Production. For Preview testing, use a separate test Sheet. Use a Google service account with the Sheets API enabled and share this new Sheet with its `client_email` as Editor. Keep the Sheet restricted. Never commit the JSON key or paste it into a chat message. Redeploy after adding the variable.
 
-The previous NHL dashboard's service-account variable is sensitive and Vercel does not return its value through the connected API. It has not been copied. The new app returns an explicit setup error until its own credential is configured. Calculator previews and local demo mode continue to work.
+The previous NHL dashboard's service-account variable is sensitive and Vercel does not return its value through the connected API. It has not been copied. The app returns an explicit setup error if its own credential is missing. Calculator previews and local demo mode continue to work.
 
 Link this repository to the existing Vercel project for deployments from main. Do not create another Vercel project with the same name. Its build/install/output overrides are in `vercel.json`.
 
@@ -39,7 +39,7 @@ Scenario analysis remains under Investments as a preview. Weekly News is a separ
 
 Run `node tests/scoring.mjs`, `node tests/markets.mjs`, `node tests/api.mjs`, `node tests/preview.mjs`, `node tests/credit-scenarios.mjs`, `node tests/weekly-news.mjs`, and `node tests/shared-pool.mjs`.
 
-The shared-pool suite tests authorization, locked phases, server calculation, deterministic replay, stale submissions, duplicate retries, cookie validation and origin restrictions using an in-memory store. A real two-device Sheets write/read test remains required after the Google credential is installed.
+The shared-pool suite tests authorization, locked phases, server calculation, deterministic replay, stale submissions, duplicate retries, cookie validation and origin restrictions using an in-memory store. The commissioner has reported successful setup. Validate shared read/write behavior after credential or hosting changes.
 
 ## Rules version 2
 
@@ -54,7 +54,12 @@ New pools use the annual investment lifecycle documented in WEEKLY_NEWS.md. Pick
 4. In Vercel's existing surplus-bowl project, add GOOGLE_SERVICE_ACCOUNT_JSON as a Production Secret (Sensitive in older UI). Paste the entire raw JSON object, not just private_key or a filename. GOOGLE_SHEET_ID and POOL_SESSION_SECRET are already present. Use a separate test Sheet for Preview if adding Preview credentials.
 5. Redeploy the latest main commit after saving. Environment changes do not affect an existing deployment.
 6. Open the production dashboard, choose Team sign in, then use a team's code from the private Access tab. Browser-demo changes do not automatically migrate to the shared pool.
-7. While Week 1 is in planning, save a discussion note reading Connection test. Verify one new discussion row in Events, refresh the dashboard, then sign in as the same team in a separate browser and verify the same note after Refresh. Replace it with the desired note and save again; preserve the audit rows.
+7. While an investment week is in planning, save the team’s intended fund allocation. Verify an allocation row in Events, refresh the dashboard, then sign in as the same team in a separate browser and verify the weights after Refresh. Preserve the audit rows.
 8. Confirm a team login has no active commissioner controls. Do not run years, lock picks or enter results for this connection test. Keep Initial!B2 and Events unchanged manually.
 
-Expected troubleshooting: setup-incomplete means missing deployment variables; Google-authentication failure means malformed/revoked credentials; Sheet-read failure means sharing, Sheet ID or API setup; rejected login means the selected team and code do not match. Production write/read verification remains pending until the credential is installed.
+Expected troubleshooting: setup-incomplete means missing deployment variables; Google-authentication failure means malformed/revoked credentials; Sheet-read failure means sharing, Sheet ID or API setup; rejected login means the selected team and code do not match. Recheck production read/write behavior after changing credentials.
+
+
+## In-person discussion
+
+The site no longer displays discussion forms, notes or team-table questions. Existing discussion commands remain replayable so the audit history stays valid. New bulletins include authored multi-paragraph fictional stories; the story prose does not alter scenario factors, outcome probabilities or price adjustments.

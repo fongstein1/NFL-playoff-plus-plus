@@ -8,3 +8,5 @@
 Vegas chatter describes simulated betting flow, changing only illustrative pool quotes. A submitted pick retains its quote. Actual game results are entered separately. Reference odds and fixtures remain samples until configured; there is no live Vegas feed.
 
 Weekly recaps retain baseline, news and regular-volatility components and each team's realized gain/loss and sale proceeds. Shared command replay prevents duplicate years. Results already used by investment history cannot be silently changed.
+
+The news page uses three-paragraph economy and sector stories, with a shorter two-paragraph Vegas desk item. All reporting is fictional. Discussion takes place in person; the site has no discussion input or notes view.
