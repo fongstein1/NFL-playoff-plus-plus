@@ -24,3 +24,10 @@ Four shared independent normal factors plus independent residuals generate covar
 All numerical inputs, outcome probabilities and sensitivities are house assumptions, not empirical estimates. No currency factor, defaults, transaction costs or dynamic rebalancing is modeled. Cash is a low-volatility game fund. Bond duration/convexity is a local approximation, not full repricing. Preview can disable volatility to isolate news; official weekly resolution always includes it.
 
 Theory references are linked in the UI: CFA Institute duration/convexity, discounted cash-flow valuation and portfolio covariance readings. Legacy session APIs remain for replay compatibility; new weekly pools use the annual model.
+
+
+## Reading scenario previews
+
+The lab defaults to the starting annual return plus the selected news, without other market moves. The optional full-year view adds the same seeded annual adjustment used previously. Official weekly years still include annual market moves. The displayed yield/spread shocks belong to the selected news, not the final net change over the year. The model does not derive an end-of-year yield from its extra return adjustment. A visible bond example and return table distinguish starting return, news, other moves and sale value.
+
+For the credit-crunch preset at moderate strength, government yields fall 10 bp. Duration 4.2 and convexity 24 give a 0.4212% news price gain. Combined with a 3% starting return this gives 3.433836%. The preview seed’s separate -11.1249518% adjustment yields -8.073128% overall. The adverse total is not attributed to the falling-yield news.
