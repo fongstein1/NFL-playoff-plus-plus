@@ -14,6 +14,8 @@ NFL logos cover all 32 clubs. Click a game for pool quotes, entries and trusted 
 
 The dashboard uses a sports newspaper layout: ivory reading surfaces, navy panels, brass controls, a turf backdrop, a live fund sidebar and four distinct trophy illustrations. Fonts are self-hosted Graduate, Public Sans and Source Serif 4; their OFL licenses are in `public/fonts/`. Optimized artwork lives in `public/art/`. The visual layer is in `public/newspaper.css`; scoring, market assumptions and the Google Sheets API are unchanged.
 
+The front page puts the four trophy races above the news. Each story has a short preview and a keyboard-accessible disclosure for the complete article. The sidebar labels the selected team's fund, target allocation and round; the turf and yard markings stay subdued behind the reading surfaces. On phones, trophies use two columns and sidebar panels stack below the news.
+
 ## Run and verify
 
 Node 24; no runtime dependencies. `npm test` runs all suites. `npm run dev` starts the local app. Vercel serves `public/` and rewrites APIs to `api/backend/`.
