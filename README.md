@@ -10,6 +10,10 @@ The final sale funds Super Bowl props: up to 100% may be staked, returns include
 
 NFL logos cover all 32 clubs. Click a game for pool quotes, entries and trusted NFL/ESPN links. Commissioners can attach an ESPN postseason event; both clubs must match. Event context is fetched server-side and does not alter pool settlement. Demo fixtures, odds and results are illustrative, with absent kickoff/venue information explicitly labeled.
 
+## Visual design
+
+The dashboard uses a sports newspaper layout: ivory reading surfaces, navy panels, brass controls, a turf backdrop, a live fund sidebar and four distinct trophy illustrations. Fonts are self-hosted Graduate, Public Sans and Source Serif 4; their OFL licenses are in `public/fonts/`. Optimized artwork lives in `public/art/`. The visual layer is in `public/newspaper.css`; scoring, market assumptions and the Google Sheets API are unchanged.
+
 ## Run and verify
 
 Node 24; no runtime dependencies. `npm test` runs all suites. `npm run dev` starts the local app. Vercel serves `public/` and rewrites APIs to `api/backend/`.
