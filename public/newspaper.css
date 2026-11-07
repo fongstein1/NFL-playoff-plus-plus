@@ -111,3 +111,13 @@ th{color:#675e48;border-color:#d1c3a5;font-size:10px}td{color:#243c4d;border-col
  .issue-phase{font-size:10px;text-align:left}
  .toolbar nav button{padding-inline:14px}
 }
+
+/* Keep each inscription anchored to its artwork's brass plaque. */
+.trophy-art-wrap{--art-height:132px;height:var(--art-height);width:calc(var(--art-height)*var(--art-ratio));max-width:100%;margin-inline:auto}
+.trophy-art-overall{--art-ratio:.83624;--plaque-y:82.6%;--plaque-x:49.2%}
+.trophy-art-superBowl{--art-ratio:.8;--plaque-y:84.8%;--plaque-x:48%}
+.trophy-art-correct{--art-ratio:.81772;--plaque-y:83.5%;--plaque-x:47.8%}
+.trophy-art-investment{--art-ratio:.89219;--plaque-y:81.4%;--plaque-x:48%}
+.award-plaque{top:var(--plaque-y);left:var(--plaque-x);bottom:auto;transform:translate(-50%,-50%);font-size:7px;line-height:1;text-shadow:none}
+@media(max-width:760px){.trophy-art-wrap{--art-height:112px}.award-plaque{font-size:6px}}
+@media(max-width:480px){.trophy-art-wrap{--art-height:132px}.award-plaque{font-size:7px}}
